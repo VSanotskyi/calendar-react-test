@@ -6,13 +6,13 @@ import { LocalizationProvider, DatePicker, TimePicker } from '@mui/x-date-picker
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 import dayjs from 'dayjs';
-import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid';
 
 import { addEvent } from '../store/events/eventsSlice';
 
 const FormEvent = () => {
   const dispatch = useDispatch();
-  const { register, handleSubmit, control, reset, formState: {errors} } = useForm();
+  const { register, handleSubmit, control, reset, formState: { errors } } = useForm();
 
   const onSubmit = (data) => {
     const formattedData = {
@@ -22,7 +22,7 @@ const FormEvent = () => {
       time: dayjs(data.time).format('HH.mm'),
     };
     dispatch(addEvent(formattedData));
-    reset()
+    reset();
   };
 
   return (
@@ -37,7 +37,7 @@ const FormEvent = () => {
           label="Title"
           {...register('title', { required: true })}
         />
-        {errors.title && <p style={{color: 'red'}}>This is required</p>}
+        {errors.title && <p style={{ color: 'red' }}>This is required</p>}
         <TextField
           label="Description"
           {...register('description')}
@@ -58,7 +58,7 @@ const FormEvent = () => {
             />
           )}
         />
-        {errors.date && <p style={{color: 'red'}}>This is required</p>}
+        {errors.date && <p style={{ color: 'red' }}>This is required</p>}
         <Controller
           name="time"
           control={control}
@@ -76,7 +76,7 @@ const FormEvent = () => {
             />
           )}
         />
-        {errors.time && <p style={{color: 'red'}}>This is required</p>}
+        {errors.time && <p style={{ color: 'red' }}>This is required</p>}
         <Button type="submit" variant="contained" color="primary">
           Submit
         </Button>

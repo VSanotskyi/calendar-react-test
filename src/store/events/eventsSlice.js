@@ -17,29 +17,23 @@ const eventsSlice = createSlice({
         time: '13.00',
       },
     ],
-    eventsPerDay: [],
   },
 
   reducers: {
     addEvent: (state, { payload }) => {
       state.events.push(payload);
     },
-    filterEvents: (state, { payload }) => {
-      state.eventsPerDay = state.events.filter(e => e.date === payload);
-    },
     deleteEvent: (state, { payload }) => {
-      state.events = state.events.filter(e => e.id === payload.id);
-
+      state.events = state.events.filter(e => e.id !== payload);
     },
   },
 });
 
-const { addEvent, filterEvents, deleteEvent } = eventsSlice.actions;
+const { addEvent, deleteEvent } = eventsSlice.actions;
 const eventsReducer = eventsSlice.reducer;
 
 export {
   eventsReducer,
   addEvent,
-  filterEvents,
   deleteEvent,
 };

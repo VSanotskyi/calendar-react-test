@@ -6,18 +6,15 @@ import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 
 import dayjs from 'dayjs';
 
-import { useDispatch } from 'react-redux';
-import { filterEvents } from '../store/events/eventsSlice';
-
 import HourlyTable from './HourlyTabel';
 
 const Calendar = () => {
-  const dispatch = useDispatch()
   const [isOpenTable, setIsOpenTable] = useState(false);
+  const [date, setDate] = useState(null);
 
   const handleChange = ({$d}) => {
-    const date = dayjs($d).format('DD.MM.YYYY');
-    dispatch(filterEvents(date))
+    const formattedDate = dayjs($d).format('DD.MM.YYYY');
+    setDate(formattedDate)
     setIsOpenTable(true);
   };
 
@@ -26,7 +23,7 @@ const Calendar = () => {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DateCalendar onChange={handleChange} />
       </LocalizationProvider>
-      {isOpenTable && <HourlyTable/>}
+      {isOpenTable && <HourlyTable date={date}/>}
     </div>
   );
 };

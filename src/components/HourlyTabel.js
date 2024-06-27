@@ -3,15 +3,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import EventIcon from '@mui/icons-material/Event';
 
-import { eventsPerDaySelect } from '../store/events/eventsSelect';
+import { eventsSelect } from '../store/events/eventsSelect';
 import { deleteEvent } from '../store/events/eventsSlice';
+import { useEffect } from 'react';
 
-const HourlyTable = () => {
-  const eventsPerDay = useSelector(eventsPerDaySelect);
+const HourlyTable = ({date}) => {
   const dispatch = useDispatch();
+  const events = useSelector(eventsSelect);
 
   const renderEventsForHour = (hour) => {
-    const eventsForHour = eventsPerDay.filter(event => {
+    const filterEvents = events.filter(e => {
+      return  e.date === date
+    })
+
+    const eventsForHour = filterEvents.filter(event => {
       const normalizeTme = Number(Math.floor(event.time));
       return normalizeTme === hour;
     });
@@ -23,12 +28,17 @@ const HourlyTable = () => {
         <p>{event.date}</p>
         <p>{event.time}</p>
         <button onClick={() => {
+          console.log(event);
           dispatch(deleteEvent(event.id));
         }}>Delete
         </button>
       </li>))}
     </ul>);
   };
+
+  useEffect(() => {
+
+  }, [events]);
 
   const renderHourlyTable = () => {
     let rows = [];
