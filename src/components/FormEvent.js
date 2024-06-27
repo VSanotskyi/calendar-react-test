@@ -30,7 +30,7 @@ const FormEvent = () => {
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
-        sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: 400, margin: '0 auto' }}
+        sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: 400, margin: '0' }}
       >
         <h3>Add new event</h3>
         <TextField

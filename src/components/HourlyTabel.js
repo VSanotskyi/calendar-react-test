@@ -5,16 +5,15 @@ import EventIcon from '@mui/icons-material/Event';
 
 import { eventsSelect } from '../store/events/eventsSelect';
 import { deleteEvent } from '../store/events/eventsSlice';
-import { useEffect } from 'react';
 
-const HourlyTable = ({date}) => {
+const HourlyTable = ({ date }) => {
   const dispatch = useDispatch();
   const events = useSelector(eventsSelect);
 
   const renderEventsForHour = (hour) => {
     const filterEvents = events.filter(e => {
-      return  e.date === date
-    })
+      return e.date === date;
+    });
 
     const eventsForHour = filterEvents.filter(event => {
       const normalizeTme = Number(Math.floor(event.time));
@@ -28,17 +27,12 @@ const HourlyTable = ({date}) => {
         <p>{event.date}</p>
         <p>{event.time}</p>
         <button onClick={() => {
-          console.log(event);
           dispatch(deleteEvent(event.id));
         }}>Delete
         </button>
       </li>))}
     </ul>);
   };
-
-  useEffect(() => {
-
-  }, [events]);
 
   const renderHourlyTable = () => {
     let rows = [];
