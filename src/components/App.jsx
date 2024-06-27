@@ -1,16 +1,18 @@
-export const App = () => {
+import Calendar from './Calendar';
+import FormEvent from './FormEvent';
+
+const style = {
+  display: 'flex',
+
+}
+
+const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+    <div style={style}>
+      <Calendar />
+      <FormEvent />
     </div>
   );
 };
+
+export default App;
